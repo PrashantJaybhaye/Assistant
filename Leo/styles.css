@@ -79,7 +79,7 @@ body {
 }
 
 .content .mic i {
-  font-size: 2rem;
+  font-size: 1.8rem;
   color: #333;
 }
 
@@ -88,6 +88,7 @@ body {
 }
 
 .welcome h3{
+    text-align: center;
     font-size: 1.2rem;
     font-weight: 550;
 }
