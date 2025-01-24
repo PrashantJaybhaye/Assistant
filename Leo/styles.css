@@ -61,6 +61,8 @@ body {
   /* margin-top: 6rem;
   margin-bottom: 1rem; */
   position: fixed;
+  outline: none;
+  border: none;
   bottom: 3rem;
   display: flex;
   align-items: center;
