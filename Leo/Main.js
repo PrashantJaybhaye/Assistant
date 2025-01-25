@@ -28,7 +28,7 @@ btn.addEventListener("click", () => {
       speak("Opening Instagram...");
       window.open("https://www.instagram.com/prashanttt__214", "_blank");
     } else {
-      speak("search on Youtube");
+      speak("search on Youtube...");
     }
   }
   speak("I'm your voice assistant, Just ask away!!");
@@ -38,8 +38,9 @@ btn.addEventListener("click", () => {
   }, 3000);
 
   recongnition.onresult = (event) => {
-    console.log(event);
+    const command = event.results[0][0].transcript.toLowerCase()
+    handleCommands(command)
+        
   };
 });
 
-console.log(btn);
