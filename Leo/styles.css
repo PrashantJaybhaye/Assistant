@@ -82,7 +82,7 @@ body {
 
 .content .mic i {
   font-size: 1.8rem;
-  color: #333;
+  color: blue;
 }
 
 .welcome p{
@@ -93,4 +93,9 @@ body {
     text-align: center;
     font-size: 1.2rem;
     font-weight: 550;
+}
+
+.bx-x{
+    display: none;
+    color: white;
 }

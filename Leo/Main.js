@@ -7,6 +7,7 @@ btn.addEventListener("click", () => {
   // Converting text format to voice or speak format
   function speak(text) {
     const speech = new SpeechSynthesisUtterance(text);
+    speech.lang = "en-GB";
     window.speechSynthesis.speak(speech);
   }
 
@@ -19,28 +20,46 @@ btn.addEventListener("click", () => {
       //this is opening Youtube
       speak("Opening Youtube...");
       window.open("https://www.youtube.com", "_blank");
-    } else if (command.includes("open instagram")) {
+    } else if (command.includes("open instagram"),
+    command.includes("open insta")) {
       //this is opening instagram
       speak("Opening Instagram...");
       window.open("https://www.instagram.com/prashanttt__214", "_blank");
-    } else if (command.includes("open insta")) {
-      //this is opening instagram
-      speak("Opening Instagram...");
-      window.open("https://www.instagram.com/prashanttt__214", "_blank");
+    } else if (command.includes("open whatsapp")) {
+      //this is opening Whatsapp
+      speak("Opening Whatsapp...");
+      window.open("https://www.whatsapp.com", "_blank");
+    } else if (command.includes("open google")) {
+      //this is opening Whatsapp
+      speak("Opening Google...");
+      window.open("https://www.google.com", "_blank");
     } else {
-      speak("search on Youtube...");
+      //this is searching on Google
+      speak("search on Google...");
+      window.open(`https://www.google.com/search?q=${command}`, "_blank");
     }
   }
-  speak("I'm your voice assistant, Just ask away!!");
+  speak("How can I help you today?");
 
   setTimeout(() => {
+    btn.style.color = "white";
+    btn.style.backgroundColor = "red";
     recongnition.start();
-  }, 3000);
+  }, 2100);
 
   recongnition.onresult = (event) => {
     const command = event.results[0][0].transcript.toLowerCase()
     handleCommands(command)
-        
+    console.log(command);
+    
   };
+  recongnition.onend = () => {
+    btn.convertDesgin();
+    btn.style.backgroundColor = "#fff";
+  };
+
+  function convertDesgin(){
+    querySelector(".bx-x").style.display = "block";
+  }
 });
 
