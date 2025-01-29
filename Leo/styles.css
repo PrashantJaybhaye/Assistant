@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-
+/* Base styles */
 * {
   margin: 0;
   padding: 0;
@@ -7,95 +6,266 @@
 }
 
 body {
-  font-family: "Roboto", sans-serif;
-  background: #f5f9ff;
-  width: 100%;
-  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #ffffff, #f9fafb);
 }
 
 .container {
-  max-width: 1170px;
-  height: 100%;
-  margin: auto;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  padding: 0 20px;
-}
-
-.content {
-  padding-top: 30vh;
-  display: flex;
-  gap: 2.5rem;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
 }
 
-.content .logo-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 6rem;
-  height: 6rem;
-  background-color: #ffffff;
-  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-    rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.1) 0px 4px 6px -4px;
-  border-radius: 50%;
-}
-
-.content .logo-icon i {
-  font-size: 3rem;
-  color: #333;
-}
-
-.content .welcome {
+/* Header styles */
+.header {
+  width: 100%;
+  max-width: 64rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  gap: 2.5rem;
+  padding-top: 4rem;
 }
 
-.content .mic {
-  /* margin-top: 6rem;
-  margin-bottom: 1rem; */
-  position: fixed;
-  outline: none;
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, #0e2350, #2d466f);
+  padding: 1rem 1.75rem;
+  border-radius: 1.25rem;
+  box-shadow: 0 8px 16px -4px rgba(15, 23, 42, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.logo:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 20px -4px rgba(15, 23, 42, 0.2);
+}
+
+.brain-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  color: #ffffff;
+}
+
+.logo h1 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.1em;
+  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, sans-serif;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: white;
+  padding: 0.5rem 1.25rem;
+  border-radius: 9999px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.sparkle-icon {
+  width: 1rem;
+  height: 1rem;
+  color: #6b7280;
+}
+
+.badge span {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+/* Main content styles */
+.main-content {
+  flex: 1;
+  width: 100%;
+  max-width: 42rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 3rem 0;
+}
+
+.text-content {
+  text-align: center;
+}
+
+.text-content h2 {
+  font-size: clamp(1.875rem, 5vw, 3rem);
+  font-weight: 600;
+  color: #111827;
+  letter-spacing: -0.025em;
+  margin-bottom: 1rem;
+}
+
+.text-content p {
+  color: #4b5563;
+  max-width: 28rem;
+  margin: 0 auto;
+}
+
+/* Voice interface styles */
+.voice-interface {
+  position: relative;
+  margin: 2rem 0;
+}
+
+.pulse-ring {
+  position: absolute;
+  inset: -8px;
+  border-radius: 9999px;
+  transition: all 0.2s;
+}
+
+.pulse-ring.active {
+  animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+  background-color: rgba(59, 130, 246, 0.1);
+  opacity: 0.75;
+}
+
+#voiceButton {
+  position: relative;
   border: none;
-  bottom: 3rem;
+  background: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#voiceButton:hover {
+  transform: scale(1.05);
+}
+
+#voiceButton:active {
+  transform: scale(0.95);
+}
+
+.button-inner {
+  width: 7rem;
+  height: 7rem;
+  background: linear-gradient(135deg, #ffffff, #f8fafc);
+  border-radius: 9999px;
+  box-shadow: 0 12px 24px -8px rgba(15, 23, 42, 0.15),
+    0 4px 8px -4px rgba(15, 23, 42, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 5rem;
-  height: 5rem;
-  background-color: #ffffff;
-  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-    rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.1) 0px 4px 6px -4px;
-  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
 }
 
-.content .mic:hover{
-    cursor: pointer;
-    background-color: #EFF6FF;
+.button-icon {
+  width: 5.5rem;
+  height: 5.5rem;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
 }
 
-.content .mic i {
-  font-size: 1.8rem;
-  color: blue;
+.mic-icon {
+  width: 2rem;
+  height: 2rem;
+  color: white;
+  transition: transform 0.2s ease;
 }
 
-.welcome p{
-    font-size: 1.1rem;
+.status {
+  position: absolute;
+  bottom: -3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 1.25rem;
+  background: white;
+  border-radius: 9999px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.welcome h3{
-    text-align: center;
-    font-size: 1.2rem;
-    font-weight: 550;
+.status-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: greenyellow;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
 }
 
-.bx-x{
-    display: none;
-    color: white;
+.status-dot.active {
+  background-color: red;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.status-text {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #4b5563;
+}
+
+/* Animations */
+@keyframes ping {
+  75%,
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .header {
+    padding-top: 4rem;
+  }
+
+  .main-content {
+    padding: 2rem 0;
+  }
+
+  .button-inner {
+    width: 6rem;
+    height: 6rem;
+  }
+
+  #voiceButton:focus {
+    outline: none;
+  }
+  
+  .button-icon {
+    width: 4.75rem;
+    height: 4.75rem;
+  }
+
+  .mic-icon {
+    width: 2rem;
+    height: 2rem;
+  }
 }

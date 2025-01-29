@@ -2,29 +2,50 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-  <link rel="shortcut icon" href="favicon.svg" type="image/x-icon">
-  <link rel="stylesheet" href="styles.css">
-  <title>Leo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leo - AI Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body>
-  <div class="container">
-    <div class="content">
-      <div class="logo-icon">
-        <i class='bx bx-user-circle'></i>
-      </div>
-      <div class="welcome">
-        <!-- <p>Listening...</p> -->
-        <p>How can I help you today?</p>
-        <h3>I'm your voice assistant, Just ask away!!</h3>
-        <button class="mic" id="btn">
-          <i class='bx bx-microphone'></i>
-          <i class='bx bx-x'></i>
-        </button>
-      </div>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <i data-lucide="cpu" class="brain-icon"></i>
+                <h1>LEO</h1>
+            </div>
+            <div class="badge">
+                <i data-lucide="sparkles" class="sparkle-icon"></i>
+                <span>AI-Powered Assistant</span>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="text-content">
+                <h2>How can I help you?</h2>
+                <p>I'm Leo, your AI assistant. Speak naturally, and I'll understand your requests.</p>
+            </div>
+
+            <!-- Voice Interface -->
+            <div class="voice-interface">
+                <div class="pulse-ring"></div>
+                <button id="voiceButton" aria-label="Toggle voice assistant">
+                    <div class="button-inner">
+                        <div class="button-icon">
+                            <i data-lucide="mic" class="mic-icon"></i>
+                        </div>
+                    </div>
+                </button>
+                <div class="status">
+                    <div class="status-dot"></div>
+                    <span class="status-text">Ready to Listen</span>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="Main.js"></script>
