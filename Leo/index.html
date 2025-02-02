@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +7,6 @@
     <link rel="stylesheet" href="styles.css">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-
 <body>
     <div class="container">
         <!-- Header -->
@@ -45,10 +43,39 @@
                     <span class="status-text">Ready to Listen</span>
                 </div>
             </div>
+
+            <!-- Chat Box -->
+            <div class="chat-box-container">
+                <div class="chat-box">
+                    <div class="chat-header">
+                        <h3>Chat with Leo</h3>
+                        <button class="close-button" aria-label="Close chat">
+                            <i data-lucide="x" class="close-icon"></i>
+                        </button>
+                    </div>
+                    <div class="chat-messages" id="chatMessages"></div>
+                    <div class="chat-input">
+                        <input type="text" id="chatInput" placeholder="Type a message...">
+                        <button id="sendButton" aria-label="Send message">
+                            <i data-lucide="send" class="send-icon"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Menu Toggle Button -->
+            <button class="menu-toggle" id="menuToggleButton" aria-label="Toggle chat box">
+                <i data-lucide="message-square" class="menu-icon"></i>
+            </button>
+
+            <!-- Dark Mode Toggle -->
+            <button class="dark-mode-toggle" id="darkModeButton" aria-label="Toggle dark mode">
+                <i data-lucide="moon" class="moon-icon"></i>
+                <span>Dark Mode</span>
+            </button>
         </div>
     </div>
 
     <script src="Main.js"></script>
 </body>
-
 </html>
