@@ -115,22 +115,37 @@ function handleCommands(command) {
 
 // Function to send message to Gemini AI
 async function sendToGeminiAI(message) {
+  const API_KEY = "AIzaSyC4saPJ9Q2oCFwDCCsgjzzeBiGx71VXMz0"; // ⚠️ Store this securely in backend!
+  const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+
   try {
-    const response = await fetch('https://api.gemini.ai/v1/chat', {
-      method: 'POST',
+    const response = await fetch(API_URL, {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer YOUR_GEMINI_AI_API_KEY'
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify({ message })
+      body: JSON.stringify({
+        contents: [
+          {
+            parts: [{ text: message }]
+          }
+        ]
+      })
     });
+
     const data = await response.json();
-    return data.reply;
+
+    if (!response.ok) {
+      return `Error: ${data.error?.message || "Unknown error"}`;
+    }
+
+    return data.candidates?.[0]?.content?.parts?.[0]?.text || "No valid response from AI.";
   } catch (error) {
-    console.error('Error communicating with Gemini AI:', error);
-    return 'Sorry, I could not process your request.';
+    console.error("Error communicating with Gemini API:", error);
+    return "Sorry, I could not process your request.";
   }
 }
+
 
 function sendMessage() {
   const message = chatInput.value.trim();
@@ -150,6 +165,8 @@ function addMessageToChat(sender, message) {
   chatMessages.appendChild(messageElement);
   chatMessages.scrollTop = chatMessages.scrollHeight;
 }
+
+// Dark mode toggle
 
 darkModeButton.addEventListener("click", () => {
   document.body.classList.toggle("dark-mode");
@@ -187,4 +204,23 @@ window.addEventListener("resize", () => {
     chatBox.style.borderRadius = "0";
   }
 });
+
+// Initial check for responsive chat box
+if (window.innerWidth <= 640) {
+  chatBox.style.position = "fixed";
+  chatBox.style.bottom = "0";
+  chatBox.style.left = "0";
+  chatBox.style.width = "100%";
+  chatBox.style.height = "50%";
+  chatBox.style.overflow = "hidden";
+  chatBox.style.borderRadius = "1rem 1rem 0 0";
+} else {
+  chatBox.style.position = "fixed";
+  chatBox.style.left = "0";
+  chatBox.style.bottom = "0";
+  chatBox.style.width = "300px";
+  chatBox.style.height = "100%";
+  chatBox.style.overflowY = "auto";
+  chatBox.style.borderRadius = "0";
+}
 
