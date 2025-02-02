@@ -246,13 +246,9 @@ body.dark-mode .button-inner {
   bottom: 0;
   right: 0;
   width: 100%;
-  max-width: 400px;
   height: 60%;
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 8px 8px 0 0;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .chat-box-container.active {
@@ -263,23 +259,31 @@ body.dark-mode .button-inner {
   display: flex;
   flex-direction: column;
   height: 100%;
-  max-width: 600px;
-  margin: 0 auto;
   padding: 20px;
   background-color: #f9f9f9;
-  border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.chat-box.open {
-  transform: translateY(0);
+  transition: all 0.3s ease;
 }
 
 .chat-header {
+  display: flex;
+  justify-content: space-between;
   padding-bottom: 10px;
   border-bottom: 1px solid #ddd;
   margin-bottom: 10px;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.close-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #6b7280;
 }
 
 .chat-messages {
@@ -433,6 +437,44 @@ body.dark-mode .status-text {
   color: #e0e0e0;
 }
 
+.menu-toggle {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.menu-toggle:hover {
+  background: #0056b3;
+  transform: scale(1.1);
+}
+
+.menu-toggle.active {
+  background: #dc3545;
+}
+
+.menu-toggle.active:hover {
+  background: #bb2d3b;
+}
+
+.menu-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
 /* Responsive adjustments */
 @media (max-width: 700px) {
   .container {
@@ -475,6 +517,11 @@ body.dark-mode .status-text {
     overflow: hidden;
   }
 
+  .menu-toggle{
+    top: 1rem;
+    left: 1rem;
+  }
+
   .dark-mode-toggle {
     padding: 0.5rem;
     gap: 0;
@@ -485,30 +532,3 @@ body.dark-mode .status-text {
   }
 }
 
-.menu-toggle {
-  position: fixed;
-  top: 1rem;
-  left: 1rem;
-  background: #007bff;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 3rem;
-  height: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: background 0.3s ease, box-shadow 0.3s ease;
-}
-
-.menu-toggle:hover {
-  background: #0056b3;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-.menu-icon {
-  width: 1.5rem;
-  height: 1.5rem;
-}

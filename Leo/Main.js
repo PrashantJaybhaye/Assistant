@@ -17,10 +17,22 @@ const chatBox = document.querySelector(".chat-box");
 
 const menuToggleButton = document.getElementById("menuToggleButton");
 const chatBoxContainer = document.querySelector(".chat-box-container");
+const closeButton = document.querySelector(".close-button");
 
 menuToggleButton.addEventListener("click", () => {
   chatBoxContainer.classList.toggle("active");
-  chatBox.classList.toggle("active");
+  menuToggleButton.classList.toggle("active");
+  if (chatBoxContainer.classList.contains("active")) {
+    chatBoxContainer.style.display = "block";
+  } else {
+    chatBoxContainer.style.display = "none";
+  }
+});
+
+closeButton.addEventListener("click", () => {
+  chatBoxContainer.classList.remove("active");
+  menuToggleButton.classList.remove("active");
+  chatBoxContainer.style.display = "none";
 });
 
 let isListening = false;
@@ -101,12 +113,33 @@ function handleCommands(command) {
   stopListening();
 }
 
+// Function to send message to Gemini AI
+async function sendToGeminiAI(message) {
+  try {
+    const response = await fetch('https://api.gemini.ai/v1/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer YOUR_GEMINI_AI_API_KEY'
+      },
+      body: JSON.stringify({ message })
+    });
+    const data = await response.json();
+    return data.reply;
+  } catch (error) {
+    console.error('Error communicating with Gemini AI:', error);
+    return 'Sorry, I could not process your request.';
+  }
+}
+
 function sendMessage() {
   const message = chatInput.value.trim();
   if (message) {
     addMessageToChat("You", message);
     chatInput.value = "";
-    // Here you can add code to handle the message, e.g., send it to a server or process it
+    sendToGeminiAI(message).then(reply => {
+      addMessageToChat("Leo", reply);
+    });
   }
 }
 
@@ -155,21 +188,3 @@ window.addEventListener("resize", () => {
   }
 });
 
-// Initial check for responsive chat box
-if (window.innerWidth <= 640) {
-  chatBox.style.position = "fixed";
-  chatBox.style.bottom = "0";
-  chatBox.style.left = "0";
-  chatBox.style.width = "100%";
-  chatBox.style.height = "50%";
-  chatBox.style.overflow = "hidden";
-  chatBox.style.borderRadius = "1rem 1rem 0 0";
-} else {
-  chatBox.style.position = "fixed";
-  chatBox.style.left = "0";
-  chatBox.style.bottom = "0";
-  chatBox.style.width = "300px";
-  chatBox.style.height = "100%";
-  chatBox.style.overflowY = "auto";
-  chatBox.style.borderRadius = "0";
-}
