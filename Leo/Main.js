@@ -41,6 +41,7 @@ let isListening = false;
 window.onload = () => {
   document.body.classList.add("dark-mode");
   setTimeout(() => {
+    addMessageToChat("Leo", "How can I help you today?");
     speak("How can I help you today?");
   }, 1000); // Small delay to ensure the page is fully loaded
 };
@@ -152,15 +153,22 @@ function sendMessage() {
   if (message) {
     addMessageToChat("You", message);
     chatInput.value = "";
-    sendToGeminiAI(message).then(reply => {
-      addMessageToChat("Leo", reply);
-    });
+    if (message.toLowerCase().startsWith("open")) {
+      handleCommands(message.toLowerCase());
+    } else {
+      sendToGeminiAI(message).then(reply => {
+        addMessageToChat("Leo", reply);
+      });
+    }
   }
 }
 
 function addMessageToChat(sender, message) {
   const messageElement = document.createElement("div");
   messageElement.classList.add("chat-message");
+  if (sender === "Leo") {
+    messageElement.classList.add("leo");
+  }
   messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
   chatMessages.appendChild(messageElement);
   chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -184,27 +192,6 @@ recognition.onend = () => {
   }
 };
 
-// Responsive chat box
-window.addEventListener("resize", () => {
-  if (window.innerWidth <= 640) {
-    chatBox.style.position = "fixed";
-    chatBox.style.bottom = "0";
-    chatBox.style.left = "0";
-    chatBox.style.width = "100%";
-    chatBox.style.height = "50%";
-    chatBox.style.overflow = "hidden";
-    chatBox.style.borderRadius = "1rem 1rem 0 0";
-  } else {
-    chatBox.style.position = "fixed";
-    chatBox.style.left = "0";
-    chatBox.style.bottom = "0";
-    chatBox.style.width = "300px";
-    chatBox.style.height = "100%";
-    chatBox.style.overflowY = "auto";
-    chatBox.style.borderRadius = "0";
-  }
-});
-
 // Initial check for responsive chat box
 if (window.innerWidth <= 640) {
   chatBox.style.position = "fixed";
@@ -218,7 +205,7 @@ if (window.innerWidth <= 640) {
   chatBox.style.position = "fixed";
   chatBox.style.left = "0";
   chatBox.style.bottom = "0";
-  chatBox.style.width = "300px";
+  chatBox.style.width = "400px"; // Increased width
   chatBox.style.height = "100%";
   chatBox.style.overflowY = "auto";
   chatBox.style.borderRadius = "0";
