@@ -552,12 +552,12 @@ body.dark-mode .status-text {
   }
 
   .menu-toggle{
-    top: 1rem;
-    left: 1rem;
+    bottom: 2.5rem;
+    left: 2rem;
   }
 
   .dark-mode-toggle {
-    padding: 0.5rem;
+    padding: 1.2rem;
     gap: 0;
   }
 
